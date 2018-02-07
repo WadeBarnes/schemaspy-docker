@@ -12,6 +12,7 @@ RUN apk update && \
 	apk del wget ca-certificates
 
 RUN chown -R 1001:0 /app && chmod -R ug+rwx /app
+RUN chown -R 1001:0 /usr/sbin && chmod -R ug+rwx /usr/sbin
 VOLUME /app/output
 USER 1001
 
