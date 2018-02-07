@@ -1,7 +1,6 @@
 FROM frolvlad/alpine-oraclejdk8:slim
 ENV LC_ALL C
 WORKDIR /app/
-VOLUME /app/output
 COPY start.sh conf ./
 RUN apk update && \
 	apk add --no-cache wget ca-certificates graphviz ttf-ubuntu-font-family java-postgresql-jdbc && \
@@ -13,6 +12,7 @@ RUN apk update && \
 	apk del wget ca-certificates
 
 RUN chown -R 1001:0 /app && chmod -R ug+rwx /app
+VOLUME /app/output
 USER 1001
 
 CMD [ "sh", "start.sh" ]
