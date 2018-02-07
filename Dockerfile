@@ -10,4 +10,8 @@ RUN apk update && \
 	wget -nv -O lib/mysql-connector-java.jar http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.42/mysql-connector-java-5.1.42.jar && \
 	wget -nv -O lib/sqlite-jdbc.jar http://central.maven.org/maven2/org/xerial/sqlite-jdbc/3.18.0/sqlite-jdbc-3.18.0.jar && \
 	apk del wget ca-certificates
+
+RUN chown -R 1001:0 /app && chmod -R ug+rwx /app
+USER 1001
+
 CMD [ "sh", "start.sh" ]
