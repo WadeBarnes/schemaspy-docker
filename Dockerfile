@@ -9,7 +9,7 @@ RUN apk --no-cache add tini git openssh-client \
     && apk --no-cache add --virtual devs tar curl
 
 #Install Caddy Server, and All Middleware
-RUN curl "https://caddyserver.com/download/windows/amd64?license=personal" \
+RUN curl -JLO "https://caddyserver.com/download/windows/amd64?license=personal" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy
 
 # Remove build devs
