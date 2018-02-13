@@ -3,20 +3,22 @@ FROM openjdk:jre-alpine
 
 # ===================================================================================================================================================================
 # Install Caddy
-# From https://github.com/ZZROTDesign/alpine-caddy
+# Referenaces:
+# - https://github.com/ZZROTDesign/alpine-caddy
+# - https://github.com/mholt/caddy
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 RUN apk --no-cache add tini git openssh-client \
     && apk --no-cache add --virtual devs tar curl
 
-#Install Caddy Server, and All Middleware
-RUN curl -JLO "https://caddyserver.com/download/windows/amd64?license=personal" \
+# Install Caddy Server, and All Middleware
+RUN curl -JLO "https://github.com/mholt/caddy/releases/download/v0.10.10/caddy_v0.10.10_linux_amd64.tar.gz" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy
 
 # Remove build devs
 RUN apk del devs
 
-#Copy over the default Caddyfile
-COPY ./Caddyfile /etc/Caddyfile
+# Copy over the default Caddyfile
+# COPY ./Caddyfile /etc/Caddyfile
 
 ENTRYPOINT ["/sbin/tini"]
 

@@ -75,4 +75,5 @@ fi
 
 # busybox httpd
 echo "Starting webserver on port $SERVER_PORT"
-httpd -f -p $SERVER_PORT -h "$OUTPUT_PATH"
+#httpd -f -p $SERVER_PORT -h "$OUTPUT_PATH"
+exec caddy -quic --conf /etc/Caddyfile
