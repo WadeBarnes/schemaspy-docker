@@ -39,7 +39,7 @@ RUN mkdir -p /var/www/html && chmod g+w /var/www/html && chmod g+w /etc/Caddyfil
 #EXPOSE 2015
 EXPOSE 8080
 
-USER 1001
+# USER 1001
 
 # ENTRYPOINT ["/sbin/tini"]
 
@@ -73,7 +73,7 @@ RUN chown -R 1001:0 /app && chmod -R ug+rwx /app
 # RUN chown -R 1001:0 /usr/sbin && chmod -R ug+rwx /usr/sbin
 # RUN chown -R 1001:0 /bin/busybox && chmod -R ug+rwx /bin/busybox
 # VOLUME /app/output
-# USER 1001
+USER 1001
 
 CMD [ "sh", "start.sh" ]
 # ===================================================================================================================================================================
