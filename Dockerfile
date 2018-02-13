@@ -7,7 +7,7 @@ FROM openjdk:jre-alpine
 # - https://github.com/ZZROTDesign/alpine-caddy
 # - https://github.com/mholt/caddy
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RUN apk --no-cache add tini git openssh-client \
+RUN apk --no-cache add tar tini git openssh-client \
     && apk --no-cache add --virtual devs tar curl
 
 # Install Caddy Server, and All Middleware
