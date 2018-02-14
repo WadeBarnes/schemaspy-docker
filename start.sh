@@ -55,7 +55,12 @@ fi
 
 
 ARGS="-t \"$DB_TYPE\" -db \"$DB_NAME\" -dp \"$DB_DRIVER\""
-ARGS="$ARGS -hq -s \"$DB_SCHEMA\" -cat \"$DB_CATALOG\""
+
+if [ ! -z "$SCHEMASPY_HQ" ]; then
+ARGS="$ARGS -hq"
+fi
+
+ARGS="$ARGS -s \"$DB_SCHEMA\" -cat \"$DB_CATALOG\""
 ARGS="$ARGS -u \"$DB_USER\" -p \"$DB_PASSWORD\""
 if [ -n "$DB_HOST" ]; then
 	ARGS="$ARGS -host \"$DB_HOST\""
