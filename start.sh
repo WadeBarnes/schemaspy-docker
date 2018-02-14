@@ -22,7 +22,7 @@ elif [ -z "$DB_DRIVER" ]; then
 		DB_DRIVER="lib/postgresql-jdbc.jar"
 	elif [ "$DB_TYPE" == "sqlite" ]; then
 		DB_DRIVER="lib/sqlite-jdbc.jar"
-		CONNPROPS=${CONNPROPS-"sqlite.properties"}
+		CONNPROPS=${CONNPROPS-"conf/sqlite.properties"}
 	else
 		echo "ERROR: Environment variable DATABASE_TYPE unrecognized: $DB_TYPE."
 		FAIL=1

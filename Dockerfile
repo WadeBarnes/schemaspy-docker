@@ -23,7 +23,7 @@ RUN curl -L "https://github.com/mholt/caddy/releases/download/v0.10.10/caddy_v0.
 RUN apk del devs
 
 # Add the default Caddyfile
-ADD Caddyfile /etc/Caddyfile
+COPY Caddyfile /etc/Caddyfile
 
 ENTRYPOINT ["/sbin/tini"]
 # ===================================================================================================================================================================
@@ -83,7 +83,8 @@ RUN apk update && \
 RUN mkdir -p /app
 WORKDIR /app/
 
-COPY start.sh conf ./
+COPY conf ./conf
+COPY start.sh ./
 
 RUN chown -R 1001:0 /app && \
 		chmod -R ug+rwx /app
