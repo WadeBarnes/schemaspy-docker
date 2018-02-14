@@ -16,20 +16,19 @@ if [ -z "$DB_TYPE" ]; then
 	echo "ERROR: Environment variable DATABASE_TYPE is empty."
 	FAIL=1
 elif [ -z "$DB_DRIVER" ]; then
-	if [ "$DB_TYPE" == "mysql" ]; then
+	if [ "$DB_TYPE" == *"mysql"* ]; then
 		DB_DRIVER="lib/mysql-connector-java.jar"
-	elif [ "$DB_TYPE" == "pgsql" ]; then
+	elif [ "$DB_TYPE" == *"pgsql"* ]; then
 		DB_DRIVER="lib/postgresql-jdbc.jar"
-	elif [ "$DB_TYPE" == "sqlite" ]; then
+	elif [ "$DB_TYPE" == *"sqlite"* ]; then
 		DB_DRIVER="lib/sqlite-jdbc.jar"
-		CONNPROPS=${CONNPROPS-"conf/sqlite.properties"}
 	else
 		echo "ERROR: Environment variable DATABASE_TYPE unrecognized: $DB_TYPE."
 		FAIL=1
 	fi
 fi
 
-if [ "$DB_TYPE" != "sqlite" ]; then
+if [ "$DB_TYPE" != *"sqlite"* ]; then
 	if [ -z "$DB_HOST" ]; then
 		echo "ERROR - Environment variable DATABASE_HOST is empty."
 		FAIL=1
@@ -52,7 +51,6 @@ fi
 if [ -n "$FAIL" ]; then
 	exit 1
 fi
-
 
 ARGS="-t \"$DB_TYPE\" -db \"$DB_NAME\" -dp \"$DB_DRIVER\""
 

@@ -2,7 +2,7 @@ FROM openjdk:jre-alpine
 
 # ===================================================================================================================================================================
 # Install Caddy
-# Referenaces:
+# Refs:
 # - https://github.com/ZZROTDesign/alpine-caddy
 # - https://github.com/mholt/caddy
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,8 @@ ENTRYPOINT ["/sbin/tini"]
 
 # ===================================================================================================================================================================
 # Update with OpenShifty Stuff
-# From https://github.com/BCDevOps/s2i-caddy
+# Refs: 
+# - https://github.com/BCDevOps/s2i-caddy
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Create the location where we will store our content, and fiddle the permissions so we will be able to write to it.
 # Also twiddle the permissions on the Caddyfile so we will be able to overwrite it with a user-provided one if desired.
@@ -44,8 +45,10 @@ EXPOSE 8080
 
 # ===================================================================================================================================================================
 # Install SchemaSpy
-# From https://github.com/cywolf/schemaspy-docker
-# Ref https://github.com/schemaspy/schemaspy
+# Refs: 
+# - https://github.com/cywolf/schemaspy-docker
+# - https://github.com/schemaspy/schemaspy
+# - http://schemaspy.readthedocs.io/en/latest/index.html
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ENV LC_ALL=C
 
@@ -83,8 +86,7 @@ RUN apk update && \
 RUN mkdir -p /app
 WORKDIR /app/
 
-COPY conf ./conf
-COPY start.sh ./
+COPY start.sh conf ./
 
 RUN chown -R 1001:0 /app && \
 		chmod -R ug+rwx /app
