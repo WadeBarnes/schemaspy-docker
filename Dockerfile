@@ -60,7 +60,10 @@ WORKDIR /app/
 COPY start.sh conf ./
 
 RUN apk update && \
-	apk add --no-cache wget ca-certificates graphviz ttf-ubuntu-font-family java-postgresql-jdbc && \
+		apk add --no-cache librsvg graphviz
+
+RUN apk update && \
+	apk add --no-cache wget ca-certificates ttf-ubuntu-font-family java-postgresql-jdbc && \
 	mkdir lib && \
 	mkdir output && \
 	wget -nv -O lib/schemaspy.jar https://github.com/schemaspy/schemaspy/releases/download/v6.0.0-rc2/schemaspy-6.0.0-rc2.jar && \
