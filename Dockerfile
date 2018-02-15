@@ -82,7 +82,7 @@ RUN apk update && \
         libc-utils
 
 RUN apk update && \
-    apk add --no-cache \
+    apk add -v --no-cache \
         shared-mime-info
 
 RUN apk update && \
