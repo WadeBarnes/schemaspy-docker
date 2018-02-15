@@ -68,6 +68,10 @@ RUN apk update && \
     apk add --no-cache \
         libxml2
 
+RUN apk update && \
+    apk add --no-cache \
+        librsvg
+
 # Install SchemaSpy
 # Installing librsvg fixes issues with generating the SchemaSpy output; https://github.com/schemaspy/schemaspy/issues/33
 RUN apk update && \
@@ -75,8 +79,6 @@ RUN apk update && \
         wget \
         ca-certificates \
         graphviz \
-        libxml2 \
-        librsvg \
         ttf-ubuntu-font-family && \
     mkdir lib && \
     wget -nv -O lib/schemaspy-$SCHEMA_SPY_VERSION.jar https://github.com/schemaspy/schemaspy/releases/download/v$SCHEMA_SPY_VERSION/schemaspy-$SCHEMA_SPY_VERSION.jar && \
