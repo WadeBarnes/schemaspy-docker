@@ -64,6 +64,10 @@ ENV SQL_LITE_VERSION=3.18.0
 
 WORKDIR /app/
 
+RUN apk update && \
+    apk add --no-cache \
+        librsvg
+
 # Install SchemaSpy
 # Installing librsvg fixes issues with generating the SchemaSpy output; https://github.com/schemaspy/schemaspy/issues/33
 #
@@ -75,7 +79,6 @@ RUN apk update && \
     apk add --no-cache \
         wget \
         ca-certificates \
-        librsvg \
         graphviz \
         ttf-ubuntu-font-family && \
     mkdir lib && \
