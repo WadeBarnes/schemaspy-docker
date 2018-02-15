@@ -1,12 +1,17 @@
 FROM openjdk:jre-alpine
 
+RUN apk update && \
+    apk upgrade
+
 # ===================================================================================================================================================================
 # Install Caddy
 # Refs:
 # - https://github.com/ZZROTDesign/alpine-caddy
 # - https://github.com/mholt/caddy
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RUN apk --no-cache add \
+
+RUN apk update && \
+    apk --no-cache add \
         tini \
         git \
         openssh-client && \
