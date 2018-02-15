@@ -50,7 +50,7 @@ EXPOSE 8080
 # - https://github.com/schemaspy/schemaspy
 # - http://schemaspy.readthedocs.io/en/latest/index.html
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ENV LC_ALL=C
+ENV LC_ALL C
 
 # Define the default output directory for SchemaSpy
 # If you change this you will need to update the Caddy configuration.
@@ -66,6 +66,7 @@ WORKDIR /app/
 
 RUN apk update && \
     apk add --no-cache \
+        libc-utils \
         librsvg
 
 # Install SchemaSpy
