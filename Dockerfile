@@ -71,6 +71,7 @@ RUN apk update && \
         wget \
         ca-certificates \
         graphviz \
+        libxml2 \
         librsvg \
         ttf-ubuntu-font-family && \
     mkdir lib && \
