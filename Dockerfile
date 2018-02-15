@@ -71,6 +71,7 @@ RUN apk update && \
         wget \
         ca-certificates \
         graphviz \
+        librsvg \
         ttf-ubuntu-font-family && \
     mkdir lib && \
     wget -nv -O lib/schemaspy-$SCHEMA_SPY_VERSION.jar https://github.com/schemaspy/schemaspy/releases/download/v$SCHEMA_SPY_VERSION/schemaspy-$SCHEMA_SPY_VERSION.jar && \
