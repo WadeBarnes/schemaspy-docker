@@ -66,6 +66,14 @@ WORKDIR /app/
 
 RUN apk update && \
     apk add --no-cache \
+        glib
+
+RUN apk update && \
+    apk add --no-cache \
+        libc-utils
+
+RUN apk update && \
+    apk add --no-cache \
         shared-mime-info
 
 RUN apk update && \
