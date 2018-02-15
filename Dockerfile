@@ -66,6 +66,7 @@ WORKDIR /app/
 
 RUN apk update && \
     apk add --no-cache \
+        libc-utils \
         librsvg
 
 # Install SchemaSpy
