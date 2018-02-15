@@ -12,44 +12,50 @@ SERVER_PORT=${SCHEMASPY_PORT-8080}
 OUTPUT_PATH=${OUTPUT_PATH-output}
 SCHEMASPY_PATH=${SCHEMASPY_PATH-lib/schemaspy.jar}
 
+PG_SQL=pgsql
+
 if [ -z "$DB_TYPE" ]; then
-	echo "ERROR: Environment variable DATABASE_TYPE is empty."
-	FAIL=1
+  echo "ERROR: Environment variable DATABASE_TYPE is empty."
+  FAIL=1
 elif [ -z "$DB_DRIVER" ]; then
-	if [ "$DB_TYPE" == *"mysql"* ]; then
-		DB_DRIVER="lib/mysql-connector-java.jar"
-	elif [ "$DB_TYPE" == *"pgsql"* ]; then
-		DB_DRIVER="lib/postgresql-jdbc.jar"
-	elif [ "$DB_TYPE" == *"sqlite"* ]; then
-		DB_DRIVER="lib/sqlite-jdbc.jar"
-	else
-		echo "ERROR: Environment variable DATABASE_TYPE unrecognized: $DB_TYPE."
-		FAIL=1
-	fi
+  case "$DB_TYPE" in
+    *pgsql*)
+      DB_DRIVER="lib/postgresql-jdbc.jar"
+      ;;
+    *mysql*)
+      DB_DRIVER="lib/mysql-connector-java.jar"
+      ;;
+    *sqlite*)
+      DB_DRIVER="lib/sqlite-jdbc.jar"
+      ;;
+    *)
+    echo "ERROR: Environment variable DATABASE_TYPE unrecognized: $DB_TYPE."
+    FAIL=1
+  esac
 fi
 
 if [ "$DB_TYPE" != *"sqlite"* ]; then
-	if [ -z "$DB_HOST" ]; then
-		echo "ERROR - Environment variable DATABASE_HOST is empty."
-		FAIL=1
-	fi
-	if [ -z "$DB_USER" ]; then
-		echo "ERROR - Environment variable DATABASE_USER is empty."
-		FAIL=1
-	fi
-	if [ -z "$DB_PASSWORD" ]; then
-		echo "ERROR - Environment variable DATABASE_PASSWORD is empty."
-		FAIL=1
-	fi
+  if [ -z "$DB_HOST" ]; then
+    echo "ERROR - Environment variable DATABASE_HOST is empty."
+    FAIL=1
+  fi
+  if [ -z "$DB_USER" ]; then
+    echo "ERROR - Environment variable DATABASE_USER is empty."
+    FAIL=1
+  fi
+  if [ -z "$DB_PASSWORD" ]; then
+    echo "ERROR - Environment variable DATABASE_PASSWORD is empty."
+    FAIL=1
+  fi
 fi
 
 if [ -z "$DB_NAME" ]; then
-	echo "ERROR - Environment variable DATABASE_NAME is empty."
-	FAIL=1
+  echo "ERROR - Environment variable DATABASE_NAME is empty."
+  FAIL=1
 fi
 
 if [ -n "$FAIL" ]; then
-	exit 1
+  exit 1
 fi
 
 ARGS="-t \"$DB_TYPE\" -db \"$DB_NAME\" -dp \"$DB_DRIVER\""
@@ -61,10 +67,10 @@ fi
 ARGS="$ARGS -s \"$DB_SCHEMA\" -cat \"$DB_CATALOG\""
 ARGS="$ARGS -u \"$DB_USER\" -p \"$DB_PASSWORD\""
 if [ -n "$DB_HOST" ]; then
-	ARGS="$ARGS -host \"$DB_HOST\""
+  ARGS="$ARGS -host \"$DB_HOST\""
 fi
 if [ -n "$CONNPROPS" ]; then
-	ARGS="$ARGS -connprops \"$CONNPROPS\""
+  ARGS="$ARGS -connprops \"$CONNPROPS\""
 fi
 
 echo $ARGS
@@ -72,8 +78,8 @@ echo $ARGS
 java -jar "$SCHEMASPY_PATH" $ARGS -o "$OUTPUT_PATH"
 
 if [ ! -f "$OUTPUT_PATH/index.html" ]; then
-	echo "ERROR - No HTML output generated"
-	exit 1
+  echo "ERROR - No HTML output generated"
+  exit 1
 fi
 
 # busybox httpd
