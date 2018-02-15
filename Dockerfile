@@ -50,7 +50,7 @@ EXPOSE 8080
 # - https://github.com/schemaspy/schemaspy
 # - http://schemaspy.readthedocs.io/en/latest/index.html
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ENV LC_ALL C
+ENV LC_ALL=C
 
 # Define the default output directory for SchemaSpy
 # If you change this you will need to update the Caddy configuration.
@@ -64,17 +64,18 @@ ENV SQL_LITE_VERSION=3.18.0
 
 WORKDIR /app/
 
-RUN apk update && \
-    apk add --no-cache \
-        libc-utils \
-        librsvg
-
 # Install SchemaSpy
 # Installing librsvg fixes issues with generating the SchemaSpy output; https://github.com/schemaspy/schemaspy/issues/33
+#
+# Note:
+# - The build can hang on shared-mime-info triggers.  Rebuilding with noCache option, either Docker or OpenShift will generally
+#   fix this issue.  shared-mime-info is a dependency of librsvg.
+#
 RUN apk update && \
     apk add --no-cache \
         wget \
         ca-certificates \
+        librsvg \
         graphviz \
         ttf-ubuntu-font-family && \
     mkdir lib && \
