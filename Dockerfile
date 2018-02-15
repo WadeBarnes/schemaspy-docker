@@ -70,7 +70,6 @@ RUN apk update && \
     apk add --no-cache \
         wget \
         ca-certificates \
-        librsvg \
         graphviz \
         ttf-ubuntu-font-family && \
     mkdir lib && \
