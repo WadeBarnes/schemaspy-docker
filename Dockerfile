@@ -70,6 +70,10 @@ RUN apk update && \
 
 RUN apk update && \
     apk add --no-cache \
+        libxml2
+
+RUN apk update && \
+    apk add --no-cache \
         libc-utils
 
 RUN apk update && \
