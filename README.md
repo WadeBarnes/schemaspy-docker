@@ -65,3 +65,17 @@ docker run -ti --rm --name schemaspy \
 
 `DATABASE_USER`, `DATABASE_PASSWORD`: The username and password used to establish
 	the database connection.
+
+## Code of Conduct
+
+Please refer to the [Code of Conduct](./CODE_OF_CONDUCT.md) 
+
+## Contributing
+
+For information on how to contribute, refer to [Contributing](CONTRIBUTING.md)
+
+## License
+
+The source code contained in this repository is released under the [Apache License, Version 2.0](./LICENSE).
+
+The some JDBC drivers redistributed herein are NOT included under the same licensing.  Please refer to [JDBC License Information](./lib/README.md) for the details on the licenses that govern those packages.
