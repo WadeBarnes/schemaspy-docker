@@ -66,28 +66,9 @@ ENV SCHEMA_SPY_VERSION=6.0.0-rc2
 ENV POSTGRESQL_VERSION=42.2.1
 ENV MYSQL_VERSION=6.0.6
 ENV SQL_LITE_VERSION=3.18.0
+ENV ORACLE_JDBC_VERSION=8
 
 WORKDIR /app/
-
-# RUN apk update && \
-#     apk add --no-cache \
-#         glib
-
-# RUN apk update && \
-#     apk add --no-cache \
-#         libxml2
-
-# RUN apk update && \
-#     apk add --no-cache \
-#         libc-utils
-
-# RUN apk update && \
-#     apk add -v --no-cache \
-#         shared-mime-info
-
-# RUN apk update && \
-#     apk add --no-cache \
-#         librsvg
 
 # Install SchemaSpy
 # Installing librsvg fixes issues with generating the SchemaSpy output; https://github.com/schemaspy/schemaspy/issues/33
@@ -113,6 +94,7 @@ RUN mkdir -p /app
 WORKDIR /app/
 
 COPY start.sh conf ./
+COPY lib/ojdbc$ORACLE_JDBC_VERSION.jar ./lib/oracle-jdbc.jar
 
 RUN chown -R 1001:0 /app && \
     chmod -R ug+rwx /app
