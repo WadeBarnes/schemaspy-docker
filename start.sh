@@ -19,25 +19,11 @@ if [ -z "$DB_TYPE" ]; then
   FAIL=1
 fi
 
-# if [ -z "$DB_TYPE" ]; then
-#   echo "ERROR: Environment variable DATABASE_TYPE is empty."
-#   FAIL=1
-# elif [ -z "$DB_DRIVER" ]; then
-#   case "$DB_TYPE" in
-#     *pgsql*)
-#       DB_DRIVER="lib/postgresql-jdbc.jar"
-#       ;;
-#     *mysql*)
-#       DB_DRIVER="lib/mysql-connector-java.jar"
-#       ;;
-#     *sqlite*)
-#       DB_DRIVER="lib/sqlite-jdbc.jar"
-#       ;;
-#     *)
-#     echo "ERROR: Environment variable DATABASE_TYPE unrecognized: $DB_TYPE."
-#     FAIL=1
-#   esac
-# fi
+if [ -z "$DB_DRIVER" ]; then
+  if [ -e "lib/$DB_TYPE-jdbc.jar" ]; then
+    DB_DRIVER="lib/$DB_TYPE-jdbc.jar"
+  fi
+fi
 
 if [ "$DB_TYPE" != *"sqlite"* ]; then
   if [ -z "$DB_HOST" ]; then

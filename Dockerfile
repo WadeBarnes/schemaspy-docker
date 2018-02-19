@@ -83,8 +83,8 @@ RUN apk update && \
     mkdir lib && \
     wget -nv -O lib/schemaspy-$SCHEMA_SPY_VERSION.jar https://github.com/schemaspy/schemaspy/releases/download/v$SCHEMA_SPY_VERSION/schemaspy-$SCHEMA_SPY_VERSION.jar && \
     cp lib/schemaspy-$SCHEMA_SPY_VERSION.jar lib/schemaspy.jar && \
-    wget -nv -O lib/postgresql-jdbc.jar http://central.maven.org/maven2/org/postgresql/postgresql/$POSTGRESQL_VERSION/postgresql-$POSTGRESQL_VERSION.jar && \
-    wget -nv -O lib/mysql-connector-java.jar http://central.maven.org/maven2/mysql/mysql-connector-java/$MYSQL_VERSION/mysql-connector-java-$MYSQL_VERSION.jar && \
+    wget -nv -O lib/pgsql-jdbc.jar http://central.maven.org/maven2/org/postgresql/postgresql/$POSTGRESQL_VERSION/postgresql-$POSTGRESQL_VERSION.jar && \
+    wget -nv -O lib/mysql-jdbc.jar http://central.maven.org/maven2/mysql/mysql-connector-java/$MYSQL_VERSION/mysql-connector-java-$MYSQL_VERSION.jar && \
     wget -nv -O lib/sqlite-jdbc.jar http://central.maven.org/maven2/org/xerial/sqlite-jdbc/$SQL_LITE_VERSION/sqlite-jdbc-$SQL_LITE_VERSION.jar && \
     apk del \
         wget \
@@ -94,7 +94,7 @@ RUN mkdir -p /app
 WORKDIR /app/
 
 COPY start.sh conf ./
-COPY lib/ojdbc$ORACLE_JDBC_VERSION.jar ./lib/oracle-jdbc.jar
+COPY lib/ojdbc$ORACLE_JDBC_VERSION.jar ./lib/ora-jdbc.jar
 
 RUN chown -R 1001:0 /app && \
     chmod -R ug+rwx /app
