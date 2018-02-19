@@ -1,5 +1,6 @@
 FROM openjdk:jre-alpine
 
+# 
 RUN apk update && \
     apk upgrade
 
@@ -9,7 +10,6 @@ RUN apk update && \
 # - https://github.com/ZZROTDesign/alpine-caddy
 # - https://github.com/mholt/caddy
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 RUN apk update && \
     apk --no-cache add \
         tini \
@@ -45,6 +45,7 @@ RUN mkdir -p /var/www/html && \
     chmod g+w /etc/Caddyfile
 
 # Expose the port for the container to Caddy
+# If you chnage this you need to update the Caddy configuration.
 EXPOSE 8080
 # ===================================================================================================================================================================
 
@@ -73,6 +74,8 @@ WORKDIR /app/
 # Install SchemaSpy
 # Installing librsvg fixes issues with generating the SchemaSpy output; https://github.com/schemaspy/schemaspy/issues/33
 #
+# When copying drivers into the image, use the <databaseType>-jdbc.jar naming convention.  See the code below for examples.
+#
 RUN apk update && \
     apk add --no-cache \
         wget \
@@ -93,9 +96,14 @@ RUN apk update && \
 RUN mkdir -p /app
 WORKDIR /app/
 
-COPY start.sh conf ./
-COPY lib/ojdbc$ORACLE_JDBC_VERSION.jar ./lib/ora-jdbc.jar
+# Copy Oracle JDBC drivers into the image.
+# Use the <databaseType>-jdbc.jar naming convention.
+COPY lib/ojdbc$ORACLE_JDBC_VERSION.jar ./lib/orathin-jdbc.jar
 
+# Copy script(s) and configuration into the image.
+COPY start.sh conf ./
+
+# Twiddle the permissions on ensure things can be run as an arbitrary user.
 RUN chown -R 1001:0 /app && \
     chmod -R ug+rwx /app
 
