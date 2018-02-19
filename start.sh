@@ -109,7 +109,7 @@ fi
 PARAMS=$(getCmdParameters)
 echo $PARAMS
 
-java -jar "$PARAMS"
+java -jar $PARAMS
 
 if [ ! -f "$OUTPUT_PATH/index.html" ]; then
   echo "ERROR - No HTML was output generated."
