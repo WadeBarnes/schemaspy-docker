@@ -77,5 +77,3 @@ For information on how to contribute, refer to [Contributing](CONTRIBUTING.md)
 ## License
 
 The source code contained in this repository is released under the [Apache License, Version 2.0](./LICENSE).
-
-Some redistributed packages herein are NOT included under the same licensing agreement.  Please refer to [JDBC License Information](./lib/README.md) for the details on the licenses that govern those packages.  By using this software you agree to those licensing terms.

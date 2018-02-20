@@ -67,7 +67,6 @@ ENV SCHEMA_SPY_VERSION=6.0.0-rc2
 ENV POSTGRESQL_VERSION=42.2.1
 ENV MYSQL_VERSION=6.0.6
 ENV SQL_LITE_VERSION=3.18.0
-ENV ORACLE_JDBC_VERSION=8
 
 WORKDIR /app/
 
@@ -95,10 +94,6 @@ RUN apk update && \
 
 RUN mkdir -p /app
 WORKDIR /app/
-
-# Copy Oracle JDBC drivers into the image.
-# Use the <databaseType>-jdbc.jar naming convention.
-COPY lib/ojdbc$ORACLE_JDBC_VERSION.jar ./lib/orathin-jdbc.jar
 
 # Copy script(s) and configuration into the image.
 COPY start.sh conf ./
