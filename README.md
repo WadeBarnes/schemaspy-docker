@@ -19,7 +19,7 @@ Configuration is performed using environment varables.
 | DATABASE_NAME | The name of the database to document. | MyDatabase |
 | DATABASE_HOST | The hostname of the server |  postgresql |
 | DATABASE_SCHEMA | OPTIONAL - The schema in the database to document.  Defaults to `public`. | my_schema |
-| DB_CATALOG | OPTIONAL - The catalog in the database to document.  With some databases this is used to define the name of the database. | my_catalog |
+| DATABASE_CATALOG | OPTIONAL - The catalog in the database to document.  With some databases this is used to define the name of the database. | my_catalog |
 | DATABASE_DRIVER | OPTIONAL - Used to override the default JDBC driver.  The scripts attempt to set the driver base on convention using `DATABASE_TYPE` | /app/lib/pgsql-jdbc.jar |
 | DATABASE_USER | The username to use when logging into the database.  When using OpenShift this should be configured as a secrete. |  my_user |
 | DATABASE_PASSWORD | The password to use when logging into the database.  When using OpenShift this should be configured as a secrete.|  my_password |
@@ -92,6 +92,38 @@ docker run -ti --rm --name schemaspy \
 	-e DATABASE_TYPE=sqlite \
 	-e DATABASE_NAME=/app/data/mydatabase.sqlite3 \
 	schemaspy
+```
+
+## Use on other databases
+
+### Oracle
+
+Due to licensing limitations, the JDBC drivers for Oracle are not included in the build image.
+
+Links to the drivers can be found here;
+* http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html
+* A link to the latest (ojdbc8.jar) drivers can be found here; http://www.oracle.com/technetwork/database/features/jdbc/jdbc-ucp-122-3110062.html
+
+Using the Oracle Thin drivers it is easy to connect to an Oracle database.
+
+The following assumes you have (somehow) included the Oracle drivers in the image, and they have been copied into `/app/lib/` as `ora-jdbc.jar`; for example ojdbc8.jar has been copied into `/app/lib/ora-jdbc.jar`.
+
+Configuration:
+
+| Name | Value | Description |
+| ---- | ------- | ------- |
+| DATABASE_TYPE | orathin | |
+| DATABASE_NAME | CUAT | The Oracle `SID` |
+| DATABASE_SCHEMA | COLIN_MGR_UAT | The Oracle `Schema` |
+| DATABASE_CATALOG | CUAT.bcgov | The Oracle `Listener Service Name` |
+| DATABASE_USER | username | |
+| DATABASE_PASSWORD | ***** | |
+| DATABASE_HOST | hostname:portnumber | *Hostname and port number MUST be specified.* |
+| DATABASE_DRIVER | lib/ora-jdbc.jar | |
+
+The resulting SchemaSpy command looks something like this;
+```
+java -jar lib/schemaspy.jar -t "orathin" -db "CUAT" -dp "lib/ora-jdbc.jar" -s "COLIN_MGR_UAT" -cat "CUAT.bcgov" -u "username" -p "*****" -host "hostname:portnumber" -o /var/www/html
 ```
 
 ## Code of Conduct
