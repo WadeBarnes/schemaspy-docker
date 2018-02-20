@@ -50,6 +50,8 @@ As a quick-start (example), the following command will create a BuildConfig, Dep
 oc new-app https://github.com/WadeBarnes/schemaspy-docker.git -e DATABASE_TYPE=pgsql -e DATABASE_NAME=default -e DATABASE_HOST=postgresql -e DATABASE_USER=django -e DB_PASSWORD=xyz1234 
 ```
 
+For more a more structured build and deployment environment, OpenShift templates can be found in the [OpenShift templates](./openshift/templates) folder.
+
 ## Running in Docker
 
 ### Build Command
