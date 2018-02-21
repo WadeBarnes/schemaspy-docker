@@ -1,3 +1,9 @@
+# Attention
+
+**This branch and line of development has been moved over to https://github.com/WadeBarnes/SchemaSpy/tree/alpine-caddy and a pull request has been submitted to contribute the work to https://github.com/bcgov/SchemaSpy as a drop-in replacement for the current version.**
+
+This has been done in an effort to consolidate the SchemaSpy container development efforts for the https://github.com/bcgov projects.  No further work will be done on this branch, and it will be removed once the contributions are consolidated into https://github.com/bcgov/SchemaSpy.  Look to https://github.com/WadeBarnes/SchemaSpy/tree/alpine-caddy and https://github.com/bcgov/SchemaSpy for continued efforts.
+
 # SchemaSpy
 
 Quickly run SchemaSpy on a Postgres, MySQL, or SQLite3 database in order
